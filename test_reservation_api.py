@@ -34,6 +34,13 @@ class ReservationApiTest(unittest.TestCase):
         self.response = requests.get("http://flamxby.herokuapp.com/reservation/2050/10/20")
         self.assertEqual(self.response.status_code, 200)
         self.assertEqual(self.response.json(), [])
+    
+    def test_get_reservation_from_negative_dates(self):
+        """
+        Test the status code of getting the reservation from the date that are negative.
+        """
+        self.response = requests.get("http://flamxby.herokuapp.com/reservation/-2050/-10/-20")
+        self.assertEqual(self.response.status_code, 500)
 
     def test_get_reservation_from_dates_content_type(self):
         """
